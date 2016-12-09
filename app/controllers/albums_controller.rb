@@ -14,7 +14,7 @@ class AlbumsController < ApplicationController
     @album = Album.new(album_params)
 
     if @album.save!
-      redirect_to album_url(@album)
+      redirect_to band_url(@album.band)
     else
       render :new
     end
@@ -39,7 +39,7 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:id])
 
     if @album.destroy
-      redirect_to albums_url
+      redirect_to band_url(@album.band)
     else
       redirect_to album_url(@album)
     end
@@ -47,7 +47,7 @@ class AlbumsController < ApplicationController
 
   private
   def album_params
-    params.require(:album).permit(:name)
+    params.require(:album).permit(:name, :recording, :band_id)
   end
 
 end

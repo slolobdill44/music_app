@@ -1,13 +1,21 @@
 <h1><%= @band.name %></h1>
 <%= link_to "Edit Name", edit_band_url(@band) %>
+<br />
+<br />
 
-<br />
-<br />
 <h2>Albums</h2>
-<%= link_to "Add Album", albums_new_url %>
+<% @band.albums.each do |album| %>
+  <p>
+    <%= link_to album.name, album_url(album) %>
+  </p>
+<% end %>
+<br />
+<br />
 
+<%= link_to "Add Album", albums_new_url %>
 <br />
 <br />
 <br />
 <br />
+
 <%= link_to "Delete Band", band_url(@band), method: :delete %>
