@@ -7,8 +7,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<header>
+  <%= current_user.nil? ? "" : current_user.email %>
+  <% if current_user.nil? %>
+    <%= button_to 'Log In', new_session_url, method: :get %>
+  <% else %>
+    <%= button_to 'Log Out', session_url(current_user.id), method: :delete %>
+  <% end %>
+</header>
 
 <%= yield %>
 
 </body>
+
+<footer>
+  <br />
+  <br />
+  <br />
+  <%= link_to "back to index", bands_url %>
+</footer>
 </html>

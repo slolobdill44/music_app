@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <% action_url = ( action == :create ? bands_url : album_url(@album) ) %>
+    <% method = (@album.persisted? ? :patch : :post) %>
+
+    <form action="<%= action_url %>" method="post">
+      <input type="hidden" name="_method" value="<%= method %>">
+
+      <label for="album_name">Name of album</label>
+      <br />
+        <input type="text" id="album_name" name="album[name]"></input>
+
+      <br />
+      <br />
+      <label for="band_name">Band name</label>
+        <select name="bands[name]" id="dropdown">
+          <% @bands.each do |band| %>
+            <option value="<% band.name %>"><%= band.name %></option>
+          <% end %>
+        </select>
+
+      <br />
+      <br />
+      <input type="submit" value="<%= action == :create ? "Create new album!" : "Rename the album!" %>">
+    </form>
+  </body>
+
+</html>
